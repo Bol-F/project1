@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Food{% endblock %}
+
+{% block content %}
+<h2>Add a New Dish</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label for="id_name">Food Name</label><br>
+    <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}"><br>
+    <label for="id_price">Price</label><br>
+    <input type="number" name="price" id="id_price" value="{{ form.price.value|default:'' }}"><br><br>
+    <button type="submit">Save</button>
+</form>
+
+<a href="{% url 'food_list' %}">Cancel</a>
+{% endblock %}

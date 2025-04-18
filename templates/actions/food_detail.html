@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ food.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ food.name }}</h2>
+<p><strong>Price:</strong> ${{ food.price }}</p>
+<a href="{% url 'food_list' %}">Back to Menu</a>
+{% endblock %}

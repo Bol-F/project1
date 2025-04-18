@@ -1,0 +1,30 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'food_list' %}">🍽️ Food App</a></h1>
+        <nav>
+            <a href="{% url 'food_list' %}">Home</a> |
+            <a href="{% url 'food_create' %}">Add Food</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; {{ now|date:"Y" }} My Food App. Built with Django 💻</p>
+    </footer>
+</body>
+</html>

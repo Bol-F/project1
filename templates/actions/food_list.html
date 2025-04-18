@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Food List{% endblock %}
+
+{% block content %}
+<h2>Food Menu</h2>
+<ul>
+  {% for food in foods %}
+    <li>
+      <a href="{% url 'food_detail' food.pk %}">{{ food.name }}</a> - ${{ food.price }}
+    </li>
+  {% empty %}
+    <li>No food items yet. Get cookin’! 🍳</li>
+  {% endfor %}
+</ul>
+{% endblock %}
