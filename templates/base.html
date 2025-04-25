@@ -1,30 +1,42 @@
-
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1><a href="{% url 'food_list' %}">🍽️ Food App</a></h1>
-        <nav>
-            <a href="{% url 'food_list' %}">Home</a> |
-            <a href="{% url 'food_create' %}">Add Food</a>
-        </nav>
-        <hr>
-    </header>
+<header>
+    <h1><a href="{% url 'food_list' %}">🍽️ Food App</a></h1>
+    <nav>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'food_list' %}">Home</a>
+        <a href="{% url 'food_create' %}">Add Food</a>
 
-    <main>
-        {% block content %}{% endblock %}
-    </main>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+        {% endif %}
+    </nav>
 
-    <footer>
-        <hr>
-        <p>&copy; {{ now|date:"Y" }} My Food App. Built with Django 💻</p>
-    </footer>
+    <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="Search food..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <hr>
+</header>
+
+<main>
+    {% block content %} {% endblock %}
+</main>
+
+<footer>
+    <hr>
+    <p>&copy; {{ now|date:"Y" }} My Food App. Built with Django 💻</p>
+</footer>
 </body>
 </html>

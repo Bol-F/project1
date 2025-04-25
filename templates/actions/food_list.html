@@ -4,13 +4,24 @@
 
 {% block content %}
 <h2>Food Menu</h2>
+
 <ul>
-  {% for food in foods %}
+    {% for food in foods %}
     <li>
-      <a href="{% url 'food_detail' food.pk %}">{{ food.name }}</a> - ${{ food.price }}
+        <a href="{% url 'food_detail' food.pk %}">{{ food.name }}</a> - ${{ food.price }}
+        {{ food.description }}
+
+        <a href="{% url 'food_update' food.pk %}">
+            <button type="button">Edit</button>
+        </a>
+
+        <form method="post" action="{% url 'food_delete' food.pk %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('Delete {{ food.name }}?')">Delete</button>
+        </form><br><br>
     </li>
-  {% empty %}
+    {% empty %}
     <li>No food items yet. Get cookin’! 🍳</li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 {% endblock %}

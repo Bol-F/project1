@@ -1,0 +1,195 @@
+/* General body and layout styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header a {
+    color: #f0c674;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+nav a {
+    margin: 0 15px;
+    color: #f0c674;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+form input[type="text"], form input[type="number"], form button {
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+form button {
+    background-color: #f0c674;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #e0b34e;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+footer p {
+    margin: 0;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li a {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #c0392b;
+}
+
+/* Styling for the forms (add/edit food) */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form label {
+    font-size: 14px;
+    color: #555;
+}
+
+form input[type="text"], form input[type="number"] {
+    margin-top: 5px;
+}
+
+/* Ensure the search form fits well */
+form input[type="text"] {
+    width: calc(100% - 100px);
+    display: inline-block;
+    margin-top: 10px;
+}
+
+form button[type="submit"] {
+    width: 80px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 24px;
+    }
+
+    header nav {
+        display: block;
+    }
+
+    header nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    li {
+        padding: 10px;
+    }
+
+    .content-wrapper {
+        padding: 10px;
+    }
+}
+
+/* Add some style to the "empty" message */
+li.empty {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Basic hover effects for buttons */
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Style the "Back to Menu" link */
+a {
+    text-decoration: none;
+    color: #f0c674;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
