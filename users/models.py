@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class User(models.Model):
@@ -11,3 +12,12 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+
+
+
+
+class Code(models.Model):
+    code = models.PositiveIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='code')
+    expired_date = models.DateTimeField(default=timezone.now)

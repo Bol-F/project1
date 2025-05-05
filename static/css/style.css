@@ -1,195 +1,241 @@
-/* General body and layout styling */
+/*────────────────────────────────────────────────────────────────
+  1. RESET & BASE
+────────────────────────────────────────────────────────────────*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-family: sans-serif;
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+/*────────────────────────────────────────────────────────────────
+  2. DESIGN TOKENS
+────────────────────────────────────────────────────────────────*/
+:root {
+  /* Colors */
+  --color-bg: #f4f7fa;
+  --color-primary: #2c3e50;
+  --color-accent: #e67e22;
+  --color-text: #333;
+  --color-light: #ecf0f1;
+  --color-danger: #e74c3c;
+
+  /* Spacing Scale */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+
+  /* Typography Scale */
+  --font-size-1: 0.875rem; /* 14px */
+  --font-size-2: 1rem;     /* 16px */
+  --font-size-3: 1.25rem;  /* 20px */
+  --font-size-4: 1.5rem;   /* 24px */
+
+  /* Misc */
+  --radius: 6px;
+  --transition: all 0.2s ease-in-out;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
-    color: #333;
-    margin: 0;
-    padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  transition: var(--transition);
 }
 
+/*────────────────────────────────────────────────────────────────
+  3. HEADER & NAV
+────────────────────────────────────────────────────────────────*/
 header {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
+  background: var(--color-primary);
+  color: var(--color-light);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2);
 }
-
 header h1 {
-    margin: 0;
+  font-size: var(--font-size-4);
+}
+header h1 a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  gap: var(--space-2);
+}
+nav a,
+nav button {
+  color: var(--color-light);
+  background: none;
+  border: none;
+  font-size: var(--font-size-2);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+nav a:hover,
+nav a:focus,
+nav button:hover,
+nav button:focus {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  outline: none;
 }
 
-header a {
-    color: #f0c674;
-    text-decoration: none;
+/*────────────────────────────────────────────────────────────────
+  4. MAIN & CONTAINERS
+────────────────────────────────────────────────────────────────*/
+main {
+  max-width: 900px;
+  margin: var(--space-3) auto;
+  padding: 0 var(--space-2);
 }
 
-header a:hover {
-    text-decoration: underline;
-}
-
-nav a {
-    margin: 0 15px;
-    color: #f0c674;
-    text-decoration: none;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-form input[type="text"], form input[type="number"], form button {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-form button {
-    background-color: #f0c674;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: #e0b34e;
-}
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-footer p {
-    margin: 0;
-}
-
-h2 {
-    color: #333;
-    text-align: center;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    background-color: #fff;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-li a {
-    color: #333;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-li a:hover {
-    text-decoration: underline;
-}
-
-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-left: 10px;
-}
-
-button:hover {
-    background-color: #c0392b;
-}
-
-/* Styling for the forms (add/edit food) */
+/*────────────────────────────────────────────────────────────────
+  5. FORMS & BUTTONS
+────────────────────────────────────────────────────────────────*/
 form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  background: var(--color-light);
+  padding: var(--space-2);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-
-form label {
-    font-size: 14px;
-    color: #555;
+form input[type="text"],
+form input[type="number"] {
+  flex: 1 1 200px;
+  padding: var(--space-1);
+  font-size: var(--font-size-2);
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
 }
-
-form input[type="text"], form input[type="number"] {
-    margin-top: 5px;
+form button {
+  flex: 0 0 auto;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-2);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
 }
-
-/* Ensure the search form fits well */
-form input[type="text"] {
-    width: calc(100% - 100px);
-    display: inline-block;
-    margin-top: 10px;
-}
-
 form button[type="submit"] {
-    width: 80px;
-    display: inline-block;
-    margin-top: 10px;
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+form button[type="submit"]:hover,
+form button[type="submit"]:focus {
+  background: #d35400; /* slightly darker accent */
+  outline: none;
 }
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 24px;
-    }
-
-    header nav {
-        display: block;
-    }
-
-    header nav a {
-        display: block;
-        margin: 10px 0;
-    }
-
-    form {
-        padding: 15px;
-    }
-
-    li {
-        padding: 10px;
-    }
-
-    .content-wrapper {
-        padding: 10px;
-    }
+/*────────────────────────────────────────────────────────────────
+  6. FOOD LIST (GRID) & ITEMS
+────────────────────────────────────────────────────────────────*/
+ul.food-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-3);
+  margin: var(--space-2) 0;
+}
+.food-item {
+  background: var(--color-light);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.food-item h3 {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-3);
+}
+.food-item p {
+  flex: 1;
+  margin-bottom: var(--space-2);
+}
+.food-item .actions {
+  display: flex;
+  gap: var(--space-1);
+}
+.food-item .actions a,
+.food-item .actions form button {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  padding: var(--space-1) var(--space-2);
+  border: none;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: var(--font-size-2);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.food-item .actions a:hover,
+.food-item .actions form button:hover,
+.food-item .actions a:focus,
+.food-item .actions form button:focus {
+  background: #d35400;
+  outline: none;
 }
 
-/* Add some style to the "empty" message */
-li.empty {
-    color: #888;
-    font-style: italic;
+/*────────────────────────────────────────────────────────────────
+  7. EMPTY STATE & MESSAGES
+────────────────────────────────────────────────────────────────*/
+.empty-msg {
+  text-align: center;
+  font-style: italic;
+  color: #666;
+  margin-top: var(--space-3);
+}
+
+/*────────────────────────────────────────────────────────────────
+  8. FOOTER
+────────────────────────────────────────────────────────────────*/
+footer {
+  background: var(--color-primary);
+  color: var(--color-light);
+  text-align: center;
+  padding: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/*────────────────────────────────────────────────────────────────
+  9. RESPONSIVE BREAKPOINTS
+────────────────────────────────────────────────────────────────*/
+@media (max-width: 900px) {
+  ul.food-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
     text-align: center;
-}
-
-/* Basic hover effects for buttons */
-button[type="submit"]:hover {
-    background-color: #2980b9;
-}
-
-/* Style the "Back to Menu" link */
-a {
-    text-decoration: none;
-    color: #f0c674;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
+    gap: var(--space-2);
+  }
+  nav {
+    justify-content: center;
+  }
+  form {
+    flex-direction: column;
+  }
+  form input,
+  form button {
+    width: 100%;
+  }
 }

@@ -1,62 +1,59 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 from .models import Food
+from django.db.models import Q
 from .forms import FoodForm
 
 
-@login_required(login_url='login')
-def food_list(request):
-    foods = Food.objects.all()
-    return render(request, 'actions/food_list.html', {'foods': foods})
+class FoodListView(LoginRequiredMixin, ListView):
+    model = Food
+    template_name = 'actions/food_list.html'
+    context_object_name = 'foods'
+    login_url = 'login'
 
 
-@login_required(login_url='login')
-def food_detail(request, pk):
-    food = get_object_or_404(Food, pk=pk)
-    return render(request, 'actions/food_detail.html', {'food': food})
+class FoodDetailView(LoginRequiredMixin, DetailView):
+    model = Food
+    template_name = 'actions/food_detail.html'
+    context_object_name = 'food'
+    login_url = 'login'
 
 
-@login_required(login_url='login')
-def food_create(request):
-    if request.method == 'POST':
-        form = FoodForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('food_list')
-    else:
-        form = FoodForm()
-    return render(request, 'actions/food_form.html', {'form': form})
+class FoodCreateView(LoginRequiredMixin, CreateView):
+    model = Food
+    form_class = FoodForm
+    template_name = 'actions/food_form.html'
+    success_url = reverse_lazy('food_list')
+    login_url = 'login'
 
 
-@login_required(login_url='login')
-def food_delete(request, pk):
-    food = get_object_or_404(Food, pk=pk)
-    food.delete()
-    return redirect('food_list')
+class FoodUpdateView(LoginRequiredMixin, UpdateView):
+    model = Food
+    form_class = FoodForm
+    template_name = 'actions/food_form.html'
+    login_url = 'login'
+
+    def get_success_url(self):
+        return reverse_lazy('food_detail', kwargs={'pk': self.object.pk})
 
 
-@login_required(login_url='login')
-def food_update(request, pk):
-    food = get_object_or_404(Food, pk=pk)
-    if request.method == 'POST':
-        form = FoodForm(request.POST, instance=food)
-        if form.is_valid():
-            form.save()
-            return redirect('food_detail', pk=pk)  # or to 'food_list' if you prefer
-    else:
-        form = FoodForm(instance=food)
-    return render(request, 'actions/food_form.html', {'form': form})  # fallback to form
+class FoodDeleteView(LoginRequiredMixin, DeleteView):
+    model = Food
+    success_url = reverse_lazy('food_list')
+    login_url = 'login'
 
 
-@login_required(login_url='login')
-def search(request):
-    query = request.GET.get('q', '')
-    results = Food.objects.all()
-    print(query)
-    if query:
-        results = Food.objects.filter(name__icontains=query) | Food.objects.filter(description__icontains=query)
-    print(results)
-    return render(request, 'actions/food_list.html', {
-        'foods': results,
-        'query': query,
-    })
+class FoodSearchView(ListView):
+    model = Food
+    template_name = 'actions/food_list.html'
+    context_object_name = 'foods'
+    paginate_by = 10
+
+    def get_queryset(self):
+        query = self.request.GET.get('q', '')
+        if query:
+            return Food.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+        return Food.objects.all()

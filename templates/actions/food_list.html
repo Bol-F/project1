@@ -4,10 +4,19 @@
 
 {% block content %}
 <h2>Food Menu</h2>
+<form method="get" action="{% url 'food_search' %}">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search food..." aria-label="Search food">
+    <button type="submit">Search</button>
+</form>
+
+<a href="{% url 'food_create' %}">
+    <button>Add New Food</button>
+</a>
 
 <ul>
     {% for food in foods %}
     <li>
+
         <a href="{% url 'food_detail' food.pk %}">{{ food.name }}</a> - ${{ food.price }}
         {{ food.description }}
 
@@ -18,7 +27,8 @@
         <form method="post" action="{% url 'food_delete' food.pk %}" style="display:inline;">
             {% csrf_token %}
             <button type="submit" onclick="return confirm('Delete {{ food.name }}?')">Delete</button>
-        </form><br><br>
+        </form>
+        <br><br>
     </li>
     {% empty %}
     <li>No food items yet. Get cookin’! 🍳</li>
