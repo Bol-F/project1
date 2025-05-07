@@ -1,228 +1,355 @@
-/*────────────────────────────────────────────────────────────────
-  1. RESET & BASE
-────────────────────────────────────────────────────────────────*/
+/* ======================================
+   Stylesheet: Modern Food Listing UI
+   Description: Revamped styles for a clean, responsive interface
+   ====================================== */
+
+/* ======================================
+   CSS Design Tokens (Custom Properties)
+   ====================================== */
+:root {
+    /* Color Palette */
+    --color-primary: #10B981; /* Emerald green */
+    --color-primary-dark: #059669;
+    --color-secondary: #22C55E; /* Light green */
+    --color-accent: #F97316; /* Orange accent */
+    --color-accent-dark: #EA580C;
+    --color-bg: #F3F4F6; /* Light gray background */
+    --color-surface: #FFFFFF; /* Surfaces (cards, forms) */
+    --color-text-primary: #111827; /* Dark gray for primary text */
+    --color-text-secondary: #374151; /* Medium gray for secondary text */
+    --color-border: #D1D5DB; /* Light gray border */
+    --color-shadow: rgba(0, 0, 0, 0.05); /* Soft shadow color */
+
+    /* Spacing Scale */
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-s: 12px;
+    --space-m: 16px;
+    --space-l: 24px;
+    --space-xl: 32px;
+
+    /* Typography */
+    --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-heading: Georgia, serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height-normal: 1.6;
+
+    /* Misc */
+    --radius: 0.375rem; /* ~6px border radius */
+    --transition-fast: 0.2s ease-in-out;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.4s ease;
+}
+
+/* ====================
+   Base / Global Styles
+   ==================== */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
 }
+
 html {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
+
 body {
-  background-color: #f9fafb;
-  color: #1f2937;
-  line-height: 1.75;
-  transition: all 0.2s ease-in-out;
+    margin: 0;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/*────────────────────────────────────────────────────────────────
-  2. DESIGN TOKENS
-────────────────────────────────────────────────────────────────*/
-:root {
-  --color-bg: #f9fafb;
-  --color-surface: #ffffff;
-  --color-primary: #1f2937;
-  --color-accent: #3b82f6;
-  --color-accent-dark: #2563eb;
-  --color-text: #1f2937;
-  --color-muted: #6b7280;
-  --color-danger: #ef4444;
-
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-
-  --font-sm: 0.875rem;
-  --font-md: 1rem;
-  --font-lg: 1.25rem;
-  --font-xl: 1.5rem;
-
-  --radius: 0.5rem;
-  --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-top: 0;
+    margin-bottom: var(--space-m);
+    line-height: 1.25;
 }
 
-/*────────────────────────────────────────────────────────────────
-  3. HEADER & NAV
-────────────────────────────────────────────────────────────────*/
-header {
-  background: var(--color-primary);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-sm) var(--space-md);
-  flex-wrap: wrap;
-}
-header h1 {
-  font-size: var(--font-xl);
-}
-header h1 a {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-nav {
-  display: flex;
-  gap: var(--space-sm);
-  margin-top: 0.5rem;
-}
-nav a,
-nav button {
-  color: white;
-  background: transparent;
-  border: 1px solid transparent;
-  padding: 0.5rem 1rem;
-  font-size: var(--font-md);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-nav a:hover,
-nav button:hover {
-  background: var(--color-accent);
-  color: white;
+h1 {
+    font-size: 2rem; /* 32px */
 }
 
-/*────────────────────────────────────────────────────────────────
-  4. MAIN & CONTAINERS
-────────────────────────────────────────────────────────────────*/
-main {
-  max-width: 960px;
-  margin: var(--space-lg) auto;
-  padding: 0 var(--space-md);
+h2 {
+    font-size: 1.5rem; /* 24px */
 }
 
-/*────────────────────────────────────────────────────────────────
-  5. FORMS & BUTTONS
-────────────────────────────────────────────────────────────────*/
-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  background: var(--color-surface);
-  padding: var(--space-md);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-form input[type="text"],
-form input[type="number"],
-form input[type="password"] {
-  flex: 1 1 200px;
-  padding: var(--space-xs);
-  font-size: var(--font-md);
-  border: 1px solid #d1d5db;
-  border-radius: var(--radius);
-}
-form button {
-  padding: var(--space-xs) var(--space-md);
-  font-size: var(--font-md);
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  background: var(--color-accent);
-  color: white;
-  transition: background 0.2s ease;
-}
-form button:hover {
-  background: var(--color-accent-dark);
+h3 {
+    font-size: 1.25rem; /* 20px */
 }
 
-/*────────────────────────────────────────────────────────────────
-  6. FOOD LIST (GRID) & ITEMS
-────────────────────────────────────────────────────────────────*/
-ul.food-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-md);
-  margin-top: var(--space-md);
-}
-.food-item {
-  background: var(--color-surface);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius);
-  padding: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: var(--shadow);
-}
-.food-item h3 {
-  font-size: var(--font-lg);
-  margin-bottom: var(--space-xs);
-}
-.food-item p {
-  flex: 1;
-  margin-bottom: var(--space-sm);
-  color: var(--color-muted);
-}
-.food-item .actions {
-  display: flex;
-  gap: var(--space-xs);
-}
-.food-item .actions a,
-.food-item .actions form button {
-  background: var(--color-accent);
-  color: white;
-  padding: 0.5rem 0.75rem;
-  font-size: var(--font-sm);
-  border-radius: var(--radius);
-  text-decoration: none;
-  border: none;
-  transition: background 0.2s ease;
-}
-.food-item .actions a:hover,
-.food-item .actions form button:hover {
-  background: var(--color-accent-dark);
+/* Paragraphs */
+p {
+    margin-bottom: var(--space-m);
+    color: var(--color-text-secondary);
 }
 
-/*────────────────────────────────────────────────────────────────
-  7. EMPTY STATE & MESSAGES
-────────────────────────────────────────────────────────────────*/
-.empty-msg {
-  text-align: center;
-  font-style: italic;
-  color: var(--color-muted);
-  margin-top: var(--space-lg);
+/* Links */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
 }
 
-/*────────────────────────────────────────────────────────────────
-  8. FOOTER
-────────────────────────────────────────────────────────────────*/
-footer {
-  background: var(--color-primary);
-  color: white;
-  text-align: center;
-  padding: var(--space-md);
-  margin-top: var(--space-lg);
+a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
 }
 
-/*────────────────────────────────────────────────────────────────
-  9. RESPONSIVE BREAKPOINTS
-────────────────────────────────────────────────────────────────*/
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
-    align-items: center;
+/* =====================
+   Buttons & Interactions
+   ===================== */
+/* Base button style */
+button,
+.btn {
+    display: inline-block;
+    padding: var(--space-s) var(--space-m);
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-bold);
+    color: #fff;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
     text-align: center;
-    gap: var(--space-sm);
-  }
-  nav {
-    justify-content: center;
-  }
-  form {
-    flex-direction: column;
-  }
-  form input,
-  form button {
-    width: 100%;
-  }
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+button:hover,
+.btn:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px var(--color-shadow);
+}
+
+button:focus,
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--color-primary); /* Focus ring */
+}
+
+/* Secondary Button (outline style) */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: #fff;
 }
 
 
+/* ==========================
+   Header and Navigation
+   ========================== */
+header {
+    background-color: var(--color-surface);
+    padding: var(--space-s) var(--space-l);
+    box-shadow: 0 2px 4px var(--color-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: var(--space-l);
+    margin: 0;
+    padding: 0;
+}
+
+.nav-list a {
+    display: block;
+    padding: var(--space-xs) var(--space-s);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius);
+    transition: background-color var(--transition-fast);
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+    background-color: var(--color-bg);
+}
+
+/* ========================
+   Main Content & Layout
+   ======================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-l) var(--space-m);
+}
+
+.food-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-l);
+    margin: var(--space-l) 0;
+}
+
+/* Food Item Card */
+.food-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.food-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px var(--color-shadow);
+}
+
+.food-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.food-item-content {
+    padding: var(--space-m);
+}
+
+.food-item-title {
+    margin: 0 0 var(--space-s);
+    font-size: 1.25rem;
+    color: var(--color-text-primary);
+}
+
+.food-item-description {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-m);
+}
+
+.food-item-price {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    font-size: 1.1rem;
+}
+
+/* =====================
+   Form Styles
+   ===================== */
+form {
+    margin: var(--space-l) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+}
+
+label {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-primary);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: var(--space-s);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--color-text-secondary);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); /* focus glow using primary */
+}
+
+/* Accent-color for checkboxes/radios */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--color-primary);
+}
+
+/* =====================
+   Utility Classes
+   ===================== */
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* =====================
+   Responsive Adjustments
+   ===================== */
+@media (max-width: 768px) {
+    /* Stack nav items vertically on smaller screens */
+    .nav-list {
+        flex-direction: column;
+        gap: var(--space-s);
+    }
+
+    .container {
+        padding: var(--space-m);
+    }
+}
+
+@media (min-width: 768px) {
+    /* Adjust grid columns on medium and larger screens */
+    .food-list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+    .container {
+        padding: var(--space-xl) var(--space-l);
+    }
+}
+
+
+/*────────────────────────────────────────────────────────────────
+  10. CUSTOM TWEAKS
+────────────────────────────────────────────────────────────────*/
+
+.btn-delete {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    background-color: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: none;
+}
+
+.btn-delete:hover {
+    background-color: var(--color-accent-dark);
+    transform: translateY(-1px);
+}

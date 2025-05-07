@@ -11,6 +11,7 @@ class FoodListView(LoginRequiredMixin, ListView):
     template_name = 'actions/food_list.html'
     context_object_name = 'foods'
     login_url = 'login'
+    paginate_by = 3
 
 
 class FoodDetailView(LoginRequiredMixin, DetailView):

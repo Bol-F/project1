@@ -11,6 +11,7 @@
 
 <ul>
     {% for food in foods %}
+
     <li>
         {% if food.image %}
         <img src="{{ food.image.url }}" alt="{{ food.name }}" style="max-width: 200px;">
@@ -23,12 +24,34 @@
 
         <form method="post" action="{% url 'food_delete' food.pk %}" style="display:inline;">
             {% csrf_token %}
-            <button type="submit" onclick="return confirm('Delete {{ food.name }}?')">Delete</button>
+<!--            <button type="submit" onclick="return confirm('Delete {{ food.name }}?')">Delete</button>-->
+            <div class="actions">
+                <form method="post" action="{% url 'food_delete' food.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('Delete {{ food.name }}?')">Delete</button>
+                </form>
+                <a href="{% url 'food_update' food.pk %}" class="btn">Edit</a>
+            </div>
         </form>
         <br><br>
+
+
     </li>
+
     {% empty %}
     <li>No food items yet. Get cookin’! 🍳</li>
     {% endfor %}
 </ul>
+<div class="pagination">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}">&laquo; Prev</a>
+    {% endif %}
+
+    <span class="page-number">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+    {% endif %}
+</div>
+
 {% endblock %}

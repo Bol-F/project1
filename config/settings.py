@@ -56,6 +56,8 @@ MIDDLEWARE = [
     # LOCAL
     'users.middleware.LogAgent',
     'users.middleware.LogIPMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Tilni
+    'django.middleware.common.CommonMiddleware',  # Asosiy
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -120,6 +122,17 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('uz', 'Uzbek'),
+    ('ru', 'Russian'),
+]
+
+
+# Tarjima fayllarini qayerda saqlashni ko'rsatish
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
