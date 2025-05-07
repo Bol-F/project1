@@ -5,7 +5,14 @@
 {% block content %}
 <h2>{{ food.name }}</h2>
 <p><strong>Price:</strong> ${{ food.price }}</p>
-{{ food.description }}
+<p><strong>Description:</strong> {{ food.description }}</p>
+
+{% if food.image %}
+    <img src="{{ food.image.url }}" alt="{{ food.name }}" style="max-width: 400px; height: auto; margin-top: 20px;">
+{% else %}
+    <p>No image available for this food item.</p>
+{% endif %}
+
 <br><br>
-<a href="{% url 'food_list' %}">Back to Menu</a>
+<a href="{% url 'food_list' %}" class="btn btn-cancel">Back to Menu</a>
 {% endblock %}

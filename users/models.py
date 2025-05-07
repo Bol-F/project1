@@ -4,7 +4,7 @@ from django.utils import timezone
 
 class User(models.Model):
     username = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
+    gmail = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
 
     class Meta:
@@ -12,9 +12,6 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
-
-
-
 
 
 class Code(models.Model):

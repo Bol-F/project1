@@ -4,16 +4,30 @@
 
 {% block content %}
 <h2>Add a New Dish</h2>
-<form method="post">
-    {% csrf_token %}
-    <label for="id_name">Food Name</label><br>
-    <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}"><br>
-    <label for="id_description">Description</label><br>
-    <input type="text" name="description" id="id_description" value="{{ form.description.value|default:'' }}"><br>
-    <label for="id_price">Price</label><br>
-    <input type="number" name="price" id="id_price" value="{{ form.price.value|default:'' }}"><br><br>
-    <button type="submit">Save</button>
-</form>
+<!--<form method="post">-->
+<!--    &lt;!&ndash;    <label for="id_name">Food Name</label><br>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}"><br><br>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <label for="id_description">Description</label><br>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <input type="text" name="description" id="id_description" value="{{ form.description.value|default:'' }}"><br>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <label for="id_price">Price</label><br>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <input type="number" name="price" id="id_price" value="{{ form.price.value|default:'' }}"><br><br>&ndash;&gt;-->
+<!--    <form method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <button type="submit">Save</button>-->
+<!--    </form>-->
+<!--    <a href="{% url 'food_list' %}" class="btn btn-cancel">Cancel</a>-->
 
-<a href="{% url 'food_list' %}">Cancel</a>
+
+<!--    &lt;!&ndash;    <button type="submit">Save</button>&ndash;&gt;-->
+<!--</form>-->
+
+<!--<a href="{% url 'food_list' %}" class="btn btn-cancel">Cancel</a>-->
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'food_list' %}" class="btn btn-cancel">Cancel</a>
 {% endblock %}

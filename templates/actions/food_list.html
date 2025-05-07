@@ -9,20 +9,17 @@
     <button type="submit">Search</button>
 </form>
 
-<a href="{% url 'food_create' %}">
-    <button>Add New Food</button>
-</a>
-
 <ul>
     {% for food in foods %}
     <li>
+        {% if food.image %}
+        <img src="{{ food.image.url }}" alt="{{ food.name }}" style="max-width: 200px;">
+        {% else %}
+        <p>No image uploaded</p>
+        {% endif %}
 
         <a href="{% url 'food_detail' food.pk %}">{{ food.name }}</a> - ${{ food.price }}
-        {{ food.description }}
-
-        <a href="{% url 'food_update' food.pk %}">
-            <button type="button">Edit</button>
-        </a>
+        <p>{{ food.description }}</p>
 
         <form method="post" action="{% url 'food_delete' food.pk %}" style="display:inline;">
             {% csrf_token %}

@@ -1,21 +1,26 @@
+from django.views import View
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 
 
-def register(request):
-    if request.method == 'POST':
+class RegisterView(View):
+    def get(self, request):
+        return render(request, 'reg/register.html')
+
+    def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = User.objects.create_user(username=username, password=password)
         auth_login(request, user)
         return redirect('login')
 
-    return render(request, 'reg/register.html')
 
+class LoginView(View):
+    def get(self, request):
+        return render(request, 'reg/login.html')
 
-def login_view(request):
-    if request.method == 'POST':
+    def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -24,9 +29,11 @@ def login_view(request):
             auth_login(request, user)
             return render(request, 'actions/food_list.html')
 
-    return render(request, 'reg/login.html')
+        # Add feedback if login fails (optional)
+        return render(request, 'reg/login.html', {'error': 'Invalid credentials'})
 
 
-def logout(request):
-    auth_logout(request)
-    return redirect('login')
+class LogoutView(View):
+    def post(self, request):
+        auth_logout(request)
+        return redirect('login')

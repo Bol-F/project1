@@ -20,12 +20,15 @@ class FoodDetailView(LoginRequiredMixin, DetailView):
     login_url = 'login'
 
 
-class FoodCreateView(LoginRequiredMixin, CreateView):
+class FoodCreateView(CreateView):
     model = Food
     form_class = FoodForm
-    template_name = 'actions/food_form.html'
-    success_url = reverse_lazy('food_list')
-    login_url = 'login'
+    template_name = 'actions/food_form.html'  # Update with your template path
+    success_url = reverse_lazy('food_list')  # Redirect after successful creation
+
+    def form_valid(self, form):
+        # Any extra logic before saving the form
+        return super().form_valid(form)
 
 
 class FoodUpdateView(LoginRequiredMixin, UpdateView):

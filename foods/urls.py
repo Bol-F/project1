@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.FoodListView.as_view(), name='food_list'),
@@ -15,4 +17,4 @@ urlpatterns = [
     # path('del/<int:pk>/', views.food_delete, name='food_delete'),
     # path('update/<int:pk>/', views.food_update, name='food_update'),
     # path('serch/', views.search, name='search')
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

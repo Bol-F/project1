@@ -53,6 +53,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # LOCAL
+    'users.middleware.LogAgent',
+    'users.middleware.LogIPMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -139,3 +142,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "bolievfirdavs0@gmail.com"
 # EMAIL_HOST_PASSWORD=env.str("")
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
